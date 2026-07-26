@@ -1,42 +1,172 @@
-/* WMS Netflix Theme */
+/* ==========================================================================
+   WALDEN MEDIA SERVER - JELLYFIN CUSTOM THEME
+   Palette: Blockbuster Classic (Royal Blue #0040A8 & Bright Gold #FFDD00)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CUSTOM LOGO REPLACEMENT
+   -------------------------------------------------------------------------- */
+
+/* Hide standard Jellyfin logo image */
+.skinHeader-withBackground .pageTitle img {
+    display: none !important;
+}
+
+/* Add custom logo as a background overlay */
+.skinHeader-withBackground .pageTitle::after {
+    content: "";
+    display: block;
+    
+    /* LOGO DIMENSIONS - Adjust as needed */
+    width: 250px;
+    height: 60px;
+    
+    /* REPLACE LINK BELOW WITH YOUR HOSTED LOGO URL */
+    background-image: url("https://github.com/OopsGotTemper/WMS/blob/main/Walden%20Media%20Server.png?raw=true");
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 1rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. THEME VARIABLES & COLOR PALETTE
+   -------------------------------------------------------------------------- */
+
 :root {
-    --primary-r: 220;
-    --primary-g: 20;
-    --primary-b: 60;
-    --primary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 1.0);
-    --secondary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6);
-    --primary-background-transparent: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.1);
-    --secondary-background-transparent: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2);
-    --primary-background-color: #000000; /* Main background */
-    --secondary-background-color: #181818; /* Drawer, cards, dialogs */
-    --tertiary-background-color: #252525; /* Popovers */
-    --alt-accent-color: #ffffff20;
-    --text-color: #000000;
-    --header-background-color: #ffffff6e; /* This is header and tabs background */
-    --logo: url("https://github.com/OopsGotTemper/WMS/blob/main/Walden%20Media%20Server.png?raw=true");
-    --background-image: url(https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/images/jellyflix.jpg);
-    --footer-message: "🍿 Jellyflix and Chill?";
+    /* Primary "Blockbuster" Blue (Backgrounds) */
+    --p-bg-blue: #0040A8;
+    
+    /* Accent Gold-Yellow (Buttons, Indicators, Swatches) */
+    --a-accent-yellow: #FFDD00;
+    
+    /* Accent Blue-Grey (Subtle borders, dividers) */
+    --s-divider-blue: rgba(135, 175, 255, 0.2);
+    
+    /* Text Colors */
+    --t-primary-white: #FFFFFF;
+    --t-secondary-grey: #D0D0D0;
 
-    /* Alternate accents*/
-    --primary-alt1: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 1);
-    --primary-alt2: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.85);
-    --primary-alt3: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.7);
-    --primary-alt4: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.55);
-    --primary-alt5: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.4);
+    /* Design Tweaks */
+    --theme-rounding: 12px;
 }
 
-.pageTitleWithDefaultLogo {
-    background-size: 100% !important;
+
+/* --------------------------------------------------------------------------
+   3. BASE & BODY
+   -------------------------------------------------------------------------- */
+
+.skinBody {
+    background-color: var(--p-bg-blue) !important;
+    background-image: none !important;
+    color: var(--t-primary-white);
 }
 
-.layout-mobile .pageTitleWithDefaultLogo {
-    width: 130px !important;
+
+/* --------------------------------------------------------------------------
+   4. HEADER BAR (Frosted Glass Effect)
+   -------------------------------------------------------------------------- */
+
+.skinHeader-withBackground {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--s-divider-blue);
 }
 
-#loginPage .visualLoginForm:not(.hide) h1::before {
-  background-size: 50% !important;
+
+/* --------------------------------------------------------------------------
+   5. PROGRESS & PLAYED INDICATORS
+   -------------------------------------------------------------------------- */
+
+/* Progress Bars */
+.itemProgressBarForeground {
+    background-color: var(--a-accent-yellow) !important;
 }
 
-#loginPage .manualLoginForm:not(.hide) h1.sectionTitle::before {
-  background-size: 100% !important;
+/* Count/Played Indicators with Modern Glow */
+.countIndicator, .playedIndicator {
+    background: var(--a-accent-yellow) !important;
+    color: #000000 !important;
+    border-radius: var(--theme-rounding);
+    box-shadow: 0 0 10px rgba(255, 221, 0, 0.6);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. CARDS & MEDIA GRID
+   -------------------------------------------------------------------------- */
+
+/* Card Border Radius */
+.cardContent-shadow, .cardImage, .cardScalable {
+    border-radius: var(--theme-rounding) !important;
+}
+
+/* Hover Zoom & Highlight */
+.card:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover .cardImage {
+    border: 3px solid var(--a-accent-yellow) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. NAVIGATION DRAWER
+   -------------------------------------------------------------------------- */
+
+.mainDrawer {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--s-divider-blue);
+}
+
+.mainDrawer-scrollContainer {
+    color: var(--t-secondary-grey);
+}
+
+.navMenuOption-selected {
+    background-color: rgba(255, 221, 0, 0.15) !important;
+    color: var(--a-accent-yellow) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. DETAIL PAGES
+   -------------------------------------------------------------------------- */
+
+div#itemBackdrop {
+    filter: blur(15px) brightness(60%);
+    opacity: 1 !important;
+}
+
+.detailPagePrimaryContainer {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: var(--theme-rounding);
+    padding: 2rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. BUTTONS & INPUT FIELDS
+   -------------------------------------------------------------------------- */
+
+.emby-input:focus, .emby-textarea:focus, .emby-select:focus {
+    border-color: var(--a-accent-yellow) !important;
+    box-shadow: 0 0 8px rgba(255, 221, 0, 0.4);
+}
+
+.emby-button.raised[is="emby-linkbutton"], .emby-button[is="emby-button"] {
+    background: linear-gradient(135deg, #001C57 0%, #002C8F 100%) !important;
+    border-radius: 100vh;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.emby-button.raised[is="emby-linkbutton"]:hover, .emby-button[is="emby-button"]:hover {
+    box-shadow: 0 0 15px rgba(255, 221, 0, 0.5) !important;
 }
